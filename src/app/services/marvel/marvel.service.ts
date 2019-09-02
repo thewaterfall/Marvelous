@@ -5,13 +5,11 @@ import * as CryptoJS from 'crypto-js';
 import {CharacterDataWrapper} from "../../models/character/CharacterDataWrapper";
 import {Order} from "../../models/Order";
 import ORDER_TYPE = Order.ORDER_TYPE;
+import {environment} from "../../../environments/environment";
 
 @Injectable()
 export class MarvelService {
-  private BASE_URL = "https://gateway.marvel.com/v1/public";
-
-  private PUBLIC_KEY = "cd7e3d25bf222b7e096d781186681397";
-  private PRIVATE_KEY = "8d53c9b7915834ead2fbdbfff73c5a38c66ceab6";
+  private BASE_URL = `${environment.marvep_api_baseurl}/characters`;
 
   private PAGE_LIMIT = 25;
 
@@ -20,9 +18,10 @@ export class MarvelService {
 
   getRequiredParams(): HttpParams {
     let timestamp = new Date().getTime();
-    let hash = CryptoJS.MD5(timestamp + this.PRIVATE_KEY + this.PUBLIC_KEY).toString(CryptoJS.enc.Hex);
+    let hash = CryptoJS.MD5(timestamp + environment.marvel_private_apikey + environment.marvel_public_apikey)
+      .toString(CryptoJS.enc.Hex);
 
-    let params = new HttpParams().set("ts", timestamp.toString()).set("apikey", this.PUBLIC_KEY).set("hash", hash);
+    let params = new HttpParams().set("ts", timestamp.toString()).set("apikey", environment.marvel_public_apikey).set("hash", hash);
 
     return params;
   }
@@ -42,7 +41,7 @@ export class MarvelService {
   getCharacters(page: number, order?: Order): Observable<CharacterDataWrapper> {
     let offset = this.PAGE_LIMIT * (page-1);
 
-    let url: string = `${this.BASE_URL}/characters`;
+    let url: string = `${this.BASE_URL}`;
     let params = this.getRequiredParams().set("limit", this.PAGE_LIMIT.toString()).set("offset", offset.toString());
     params = this.applyOrder(order, params);
 
@@ -52,7 +51,7 @@ export class MarvelService {
   getCharactersNameStartsWith(page: number, name: string, order?: Order) {
     let offset = this.PAGE_LIMIT * (page-1);
 
-    let url: string = `${this.BASE_URL}/characters`;
+    let url: string = `${this.BASE_URL}`;
     let params = this.getRequiredParams().set("limit", this.PAGE_LIMIT.toString()).set("offset", offset.toString()).set("nameStartsWith", name);
     params = this.applyOrder(order, params);
 
