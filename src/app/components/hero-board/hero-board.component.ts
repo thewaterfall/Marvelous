@@ -84,11 +84,19 @@ export class HeroBoardComponent implements OnInit {
   }
 
   applyFilter(value: string) {
-    this.page = 1;
     this.filter.value = value;
 
-    this.characters = [];
-    this.loadCharacters();
+    setTimeout(() => {
+      if (this.filter.value !== value) {
+        return;
+      }
+
+      this.page = 1;
+      this.characters = [];
+
+      this.loadCharacters();
+    }, 1000);
+
   }
 
   applyOrder(order: Order) {
