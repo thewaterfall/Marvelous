@@ -1,0 +1,43 @@
+<div class="container">
+
+  <div class="filter-container" fxLayout="row nowrap"
+                                fxLayoutAlign="space-between"
+                                fxLayoutGap="20px">
+    <div class="filter-field" fxFlex="1 1 80%">
+      <mat-form-field>
+        <input matInput placeholder="Filter characters" (keyup)="applyFilter($event.target.value)" />
+      </mat-form-field>
+    </div>
+
+    <div class="sort-toggle" fxFlex="1 1 20%">
+      <span class="sort-label">Order:</span>
+      <mat-button-toggle-group>
+        <mat-button-toggle *ngFor="let order of filter.orders" (click)="applyOrder(order)">
+          {{order.orderType}}
+        </mat-button-toggle>
+      </mat-button-toggle-group>
+    </div>
+  </div>
+
+  <div class="hero-container" fxLayout="row wrap"
+       fxLayoutAlign="start space-between"
+       fxLayoutGap="20px"
+       infinite-scroll (scrolled)="onScrollDown()"
+       [infiniteScrollDistance]="1"
+       [infiniteScrollThrottle]="50">
+    <mat-card *ngFor="let character of characters" class="hero-element animated rotateInUpLeft" fxFlex="0 0 calc(20%-20px)"
+              (click)="openDialog(character)">
+      <mat-card-header>
+        <mat-card-title>Hero</mat-card-title>
+        <mat-card-subtitle>{{character.name}}</mat-card-subtitle>
+      </mat-card-header>
+
+      <img mat-card-image class="mat-header-image" src="{{character.thumbnail.path}}/standard_fantastic.{{character.thumbnail.extension}}" alt="Photo of a Shiba Inu">
+    </mat-card>
+
+    <div class="loader" *ngIf="!isContentLoaded">
+      <mat-spinner></mat-spinner>
+    </div>
+  </div>
+
+</div>

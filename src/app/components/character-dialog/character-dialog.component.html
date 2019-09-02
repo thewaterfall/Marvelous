@@ -1,0 +1,13 @@
+<h1 mat-dialog-title>{{data.name}}</h1>
+<div mat-dialog-content>
+  <div class="character-dialog-image">
+    <img src="{{data.thumbnail.path}}/landscape_incredible.{{data.thumbnail.extension}}" alt="Character image">
+  </div>
+  <div class="character-dialog-content">
+    <p>{{data.description}}</p>
+    <p *ngIf="data.description.length === 0">No description found</p>
+  </div>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="closeDialog()">OK</button>
+</div>

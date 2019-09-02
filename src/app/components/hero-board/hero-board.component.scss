@@ -1,0 +1,45 @@
+.container {
+  margin-top: 20px;
+}
+
+.filter-container {
+  margin: auto;
+  width: 80%;
+
+
+  mat-form-field {
+    width: 100%;
+  }
+
+  .sort-label {
+    font-size: 1.17em;
+    margin-right: 5px;
+  }
+}
+
+.hero-container {
+  margin: auto;
+  width: 90%;
+  //border: 1px dotted red;
+
+  mat-card {
+    background-color: whitesmoke;
+  }
+}
+
+.hero-element {
+  margin-top: 20px;
+
+  img {
+    transition: .2s;
+  }
+
+  img:hover  {
+    transform: scale(1.1);
+    border-radius: 5px;
+  }
+}
+
+.loader {
+  margin: 20px auto 20px auto;
+}
