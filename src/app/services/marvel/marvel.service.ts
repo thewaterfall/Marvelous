@@ -3,7 +3,6 @@ import {HttpClient, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
 import * as CryptoJS from 'crypto-js';
 import {CharacterDataWrapper} from "../../models/character/CharacterDataWrapper";
-import {ComicsService} from "../comics/comics.service";
 import {Order} from "../../models/Order";
 import ORDER_TYPE = Order.ORDER_TYPE;
 
@@ -16,7 +15,7 @@ export class MarvelService {
 
   private PAGE_LIMIT = 25;
 
-  constructor(private http: HttpClient, private comicService: ComicsService) {
+  constructor(private http: HttpClient) {
   }
 
   getRequiredParams(): HttpParams {
