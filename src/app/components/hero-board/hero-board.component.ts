@@ -16,6 +16,7 @@ export class HeroBoardComponent implements OnInit {
   ERROR_MESSAGE: string = "Error occurred";
 
   characters: Character[] = [];
+  autocompleteCharacters: Character[] = [];
   page: number = 1;
 
   filter: Filter = new Filter();
@@ -27,7 +28,7 @@ export class HeroBoardComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loadCharacters()
+    this.loadCharacters();
   }
 
   openSnackbar(message: string) {
@@ -51,7 +52,7 @@ export class HeroBoardComponent implements OnInit {
   loadCharacters() {
     this.isContentLoaded = false;
 
-    if(this.filter.value !== '') {
+    if (this.filter.value !== '') {
       this.loadCharactersByName();
     } else {
       this.marvel.getCharacters(this.page, this.filter.chosenOrder)
@@ -64,7 +65,7 @@ export class HeroBoardComponent implements OnInit {
         },
         error => {
           this.openSnackbar(this.ERROR_MESSAGE);
-        })
+        });
     }
 
   }
@@ -77,6 +78,7 @@ export class HeroBoardComponent implements OnInit {
       .subscribe(
       data => {
         this.characters = this.characters.concat(data.data.results);
+        this.applyAutocompleteFilter(this.filter.value);
       },
       error => {
         this.openSnackbar(this.ERROR_MESSAGE);
@@ -85,6 +87,7 @@ export class HeroBoardComponent implements OnInit {
 
   applyFilter(value: string) {
     this.filter.value = value;
+    this.applyAutocompleteFilter(value);
 
     setTimeout(() => {
       if (this.filter.value !== value) {
@@ -105,5 +108,9 @@ export class HeroBoardComponent implements OnInit {
 
     this.characters = [];
     this.loadCharacters();
+  }
+
+  applyAutocompleteFilter(value: string) {
+    this.autocompleteCharacters = this.characters.filter(char => char.name.toLowerCase().includes(value.toLowerCase()));
   }
 }

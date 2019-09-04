@@ -5,7 +5,13 @@
                                 fxLayoutGap="20px">
     <div class="filter-field" fxFlex="1 1 80%">
       <mat-form-field>
-        <input matInput placeholder="Filter characters" (keyup)="applyFilter($event.target.value)" />
+        <input matInput placeholder="Filter characters" (keyup)="applyFilter($event.target.value)" [matAutocomplete]="auto" />
+        <mat-autocomplete class="autocomplete-field" #auto>
+          <mat-option *ngFor="let autocompleteChar of autocompleteCharacters" [value]="autocompleteChar.name">
+            <img class="autocomplete-image" src="{{autocompleteChar.thumbnail.path}}/standard_fantastic.{{autocompleteChar.thumbnail.extension}}" height="32" width="32">
+            <span>{{autocompleteChar.name}}</span>
+          </mat-option>
+        </mat-autocomplete>
       </mat-form-field>
     </div>
 

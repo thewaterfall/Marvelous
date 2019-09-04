@@ -7,6 +7,7 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatButtonModule} from '@angular/material/button';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 const components = [
   BrowserAnimationsModule,
@@ -18,6 +19,7 @@ const components = [
   MatSnackBarModule,
   MatDialogModule,
   MatButtonModule,
+  MatAutocompleteModule,
 ];
 
 @NgModule({
