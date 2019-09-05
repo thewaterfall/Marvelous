@@ -3,7 +3,7 @@
   <div class="filter-container" fxLayout="row nowrap"
                                 fxLayoutAlign="space-between"
                                 fxLayoutGap="20px">
-    <div class="filter-field" fxFlex="1 1 80%">
+    <div class="filter-field" fxFlex="0 1 calc(80%-20px)">
       <mat-form-field>
         <input matInput placeholder="Filter characters" (keyup)="applyFilter($event.target.value)" [matAutocomplete]="auto" />
         <mat-autocomplete class="autocomplete-field" #auto>
@@ -15,8 +15,7 @@
       </mat-form-field>
     </div>
 
-    <div class="sort-toggle" fxFlex="1 1 20%">
-      <span class="sort-label">Order:</span>
+    <div class="sort-toggle" fxFlex="1 0 calc(20%-20px)">
       <mat-button-toggle-group>
         <mat-button-toggle *ngFor="let order of filter.orders" (click)="applyOrder(order)">
           {{order.orderType}}
@@ -25,13 +24,16 @@
     </div>
   </div>
 
-  <div class="hero-container" fxLayout="row wrap"
+  <div class="hero-container" fxLayout="row wrap" fxLayout.xs="column"
        fxLayoutAlign="start space-between"
        fxLayoutGap="20px"
        infinite-scroll (scrolled)="onScrollDown()"
        [infiniteScrollDistance]="1"
        [infiniteScrollThrottle]="50">
-    <mat-card *ngFor="let character of characters" class="hero-element animated rotateInUpLeft" fxFlex="0 0 calc(20%-20px)"
+    <mat-card *ngFor="let character of characters" class="hero-element animated rotateInUpLeft"
+              fxFlex="0 0 calc(20%-20px)"
+              fxFlex.md="0 0 calc(33%-20px)"
+              fxFlex.sm="0 0 calc(50%-20px)"
               (click)="openDialog(character)">
       <mat-card-header>
         <mat-card-title>Hero</mat-card-title>
