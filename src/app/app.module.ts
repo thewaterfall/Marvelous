@@ -11,13 +11,15 @@ import {HttpClientModule} from "@angular/common/http";
 import {InfiniteScrollModule} from "ngx-infinite-scroll";
 import { HeaderComponent } from './components/header/header.component';
 import { CharacterDialogComponent } from './components/character-dialog/character-dialog.component';
+import { ScrollToTopComponent } from './components/scroll-to-top/scroll-to-top.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeroBoardComponent,
     HeaderComponent,
-    CharacterDialogComponent
+    CharacterDialogComponent,
+    ScrollToTopComponent
   ],
   imports: [
     FlexLayoutModule,
