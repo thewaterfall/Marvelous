@@ -1,2 +1,9 @@
 <app-header></app-header>
 <router-outlet></router-outlet>
+
+<scroll-to-top [animateScroll]="true"
+               [distance]="500"
+               [speed]="100"
+               [acceleration]="20">
+  <i class="material-icons">arrow_upward</i>
+</scroll-to-top>
